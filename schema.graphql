@@ -1,0 +1,23 @@
+type Answer {
+  _id: ID
+  author: String
+  body: String
+  createdAt: String
+  votes: Int
+}
+
+type Query {
+  questionById(_id: ID!): Question
+  questions: [Question!]!
+}
+
+type Question {
+  _id: ID!
+  answers: [Answer!]!
+  author: String!
+  body: String!
+  createdAt: String!
+  tags: [String!]!
+  title: String!
+  votes: Int!
+}
