@@ -38,6 +38,20 @@ export type Answer = {
   votes?: Maybe<Scalars["Int"]["output"]>;
 };
 
+export type Mutation = {
+  __typename?: "Mutation";
+  downvoteQuestion?: Maybe<Question>;
+  upvoteQuestion?: Maybe<Question>;
+};
+
+export type MutationDownvoteQuestionArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type MutationUpvoteQuestionArgs = {
+  id: Scalars["ID"]["input"];
+};
+
 export type Query = {
   __typename?: "Query";
   questionById?: Maybe<Question>;
@@ -58,6 +72,32 @@ export type Question = {
   tags: Array<Scalars["String"]["output"]>;
   title: Scalars["String"]["output"];
   votes: Scalars["Int"]["output"];
+};
+
+export type UpvoteQuestionMutationVariables = Exact<{
+  id: Scalars["ID"]["input"];
+}>;
+
+export type UpvoteQuestionMutation = {
+  __typename: "Mutation";
+  upvoteQuestion?: {
+    __typename: "Question";
+    _id: string;
+    votes: number;
+  } | null;
+};
+
+export type DownvoteQuestionMutationVariables = Exact<{
+  id: Scalars["ID"]["input"];
+}>;
+
+export type DownvoteQuestionMutation = {
+  __typename: "Mutation";
+  downvoteQuestion?: {
+    __typename: "Question";
+    _id: string;
+    votes: number;
+  } | null;
 };
 
 export type QuestionDetailQueryVariables = Exact<{
@@ -112,6 +152,108 @@ export type QuestionOverviewPageQuery = {
   }>;
 };
 
+export const UpvoteQuestionDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpvoteQuestion" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "__typename" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "upvoteQuestion" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "__typename" } },
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "votes" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UpvoteQuestionMutation,
+  UpvoteQuestionMutationVariables
+>;
+export const DownvoteQuestionDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DownvoteQuestion" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "__typename" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "downvoteQuestion" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "__typename" } },
+                { kind: "Field", name: { kind: "Name", value: "_id" } },
+                { kind: "Field", name: { kind: "Name", value: "votes" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DownvoteQuestionMutation,
+  DownvoteQuestionMutationVariables
+>;
 export const QuestionDetailDocument = {
   kind: "Document",
   definitions: [

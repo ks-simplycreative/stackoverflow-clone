@@ -42,6 +42,20 @@ export type Answer = {
   votes?: Maybe<Scalars["Int"]["output"]>;
 };
 
+export type Mutation = {
+  __typename?: "Mutation";
+  downvoteQuestion?: Maybe<Question>;
+  upvoteQuestion?: Maybe<Question>;
+};
+
+export type MutationDownvoteQuestionArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type MutationUpvoteQuestionArgs = {
+  id: Scalars["ID"]["input"];
+};
+
 export type Query = {
   __typename?: "Query";
   questionById?: Maybe<Question>;
@@ -175,6 +189,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Question: ResolverTypeWrapper<QuestionDB>;
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
@@ -186,6 +201,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"]["output"];
   ID: Scalars["ID"]["output"];
   Int: Scalars["Int"]["output"];
+  Mutation: {};
   Query: {};
   Question: QuestionDB;
   String: Scalars["String"]["output"];
@@ -206,6 +222,25 @@ export type AnswerResolvers<
   >;
   votes?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<
+  ContextType = GqlContext,
+  ParentType extends
+    ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
+> = {
+  downvoteQuestion?: Resolver<
+    Maybe<ResolversTypes["Question"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDownvoteQuestionArgs, "id">
+  >;
+  upvoteQuestion?: Resolver<
+    Maybe<ResolversTypes["Question"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpvoteQuestionArgs, "id">
+  >;
 };
 
 export type QueryResolvers<
@@ -244,6 +279,7 @@ export type QuestionResolvers<
 
 export type Resolvers<ContextType = GqlContext> = {
   Answer?: AnswerResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Question?: QuestionResolvers<ContextType>;
 };

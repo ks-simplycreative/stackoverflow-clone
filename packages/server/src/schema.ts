@@ -22,4 +22,9 @@ export const typeDefinitions = /* GraphQL */ `
         createdAt: String
         votes: Int
     }
+
+    type Mutation {
+        upvoteQuestion(id: ID!): Question
+        downvoteQuestion(id: ID!): Question
+    }
 `;
